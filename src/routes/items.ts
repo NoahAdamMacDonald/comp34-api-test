@@ -12,6 +12,8 @@ items.get("/", (c)=> {
 
 //GET by id
 items.get("/:id", (c)=> {
+    const id = Number(c.req.param("id"));
+
     const statement = db.prepare("SELECT * FROM items WHERE id = ?");
     const item = statement.get(id);
 
