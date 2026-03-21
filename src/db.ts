@@ -1,12 +1,12 @@
-import Database from "bun:sqlite";
+import { Database } from "bun:sqlite";
 
-//manages database
+//manage database
 export const db = new Database("/data/database.sqlite");
-db.prepare(`
+db.run(`
   CREATE TABLE IF NOT EXISTS items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     description TEXT,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP
   );
-`).run();
+`);
