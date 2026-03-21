@@ -1,10 +1,29 @@
 # Bun API Test
+Noah MacDonald
+
+GOTO:
+- [Project Setup](#-project-setup)
+- [Endpoints](#endpoints)
+- [Fly IO](#flyio)
+- [Noah MacDonald](#noah-macdonald)
+
+- - - -
+
+API: [https://comp34-api.fly.dev/](https://comp34-api.fly.dev/)
+
+> [!NOTE]
+> root `/` does not have any requests to it
+> `/items` is the base request to visit
+
+- - - -
+
 
 | Requirements | Required |
 | :--- | :--- |
 | Linux or WSL | :white_check_mark: |
 | node v18+ | :white_check_mark: |
 | bun install | :white_check_mark: |
+| Fly.io CLI | :white_check_mark: |
 
 
 - - - -
@@ -17,7 +36,7 @@
 sudo apt update
 sudo apt install unzip -y
 curl -fsSL https://bun.sh/install | bash
-
+curl -L https://fly.io/install.sh | sh
 ```
 
 2. Linux WSL environment for VS Code
@@ -38,7 +57,7 @@ bun init
 
 4. bun dependencies
 ```bash
-bun add hono better-sqlite3
+bun add hono
 bun add -d bun-types
 ```
 
@@ -134,6 +153,73 @@ Error
   "error": "Item not found"
 }
 ```
+
+
+- - - -
+
+
+## Fly.IO
+
+create fly.io files
+```bash
+fly launch
+touch Dockerfile
+```
+
+Docker File
+```dockerfile
+FROM oven/bun:1
+
+WORKDIR /app
+
+COPY package.json bun.lock ./
+
+RUN bun install --production
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["bun", "run", "src/server.ts"]
+
+```
+
+Create persistent SQLite volume
+```bash
+fly volumes create data --size 1
+
+```
+
+add to fly.toml
+```plaintext
+[mounts]
+  source="data"
+  destination="/data"
+```
+
+deploy app
+```bash
+fly deploy
+```
+
+Starting and Stopping
+```bash
+fly machines stop --app comp34-api --select
+fly machines start --app comp34-api
+
+```
+
+- - - -
+
+## Noah MacDonald
+
+- :globe_with_meridians: [noah-macdonald.com](https://noah-macdonald.com)
+- README created using [writeme](https://writeme.pages.dev/editor)
+
+
+
+
+
 
 
 
