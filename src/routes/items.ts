@@ -5,7 +5,7 @@ const items = new Hono();
 
 // GET all
 items.get("/", (c) => {
-  const rows = db.query("SELECT * FROM items ORDER BY id DESC").all();
+  const rows = db.query("SELECT * FROM items ORDER BY id").all();
   return c.json(rows);
 });
 
