@@ -204,10 +204,11 @@ fly deploy
 
 Starting and Stopping
 ```bash
-fly machines stop --app comp34-api --select
-fly machines start --app comp34-api
+fly scale count 0 -a comp34-api
+fly scale count 1 -a comp34-api
 
 ```
+
 
 - - - -
 
