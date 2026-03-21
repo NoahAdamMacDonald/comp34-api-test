@@ -18,8 +18,23 @@ items.get("/:id", (c)=> {
     if(!item) {
         return c.json({error: "Item not found"}, 404);
     }
-    
+
     return c.json(item);
+})
+
+//POST new item
+items.post("/", async (c)=>{
+    const body = await c.req.json();
+
+    if(!body.name) {
+        return c.json({error: "Name is required"}, 400);
+    }
+
+    const statement = db.prepare("INSERT INTO items (name, description) VALUES (?, ?)");
+
+    const result = statement.run(body.name, body.description ?? null);
+
+    return c.json({id:result.lastInsertRowid}, 201);
 })
 
 
