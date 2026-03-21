@@ -207,7 +207,16 @@ Starting and Stopping
 fly scale count 0 -a comp34-api
 fly scale count 1 -a comp34-api
 
+
+
 ```
+
+updating changes
+```bash
+fly deploy -a comp34-api
+
+```
+
 
 
 - - - -
