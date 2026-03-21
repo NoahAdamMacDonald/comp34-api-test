@@ -1,7 +1,7 @@
 import Database from "bun:sqlite";
 
 //manages database
-export const db = new Database("database.sqlite");
+export const db = new Database("/data/database.sqlite");
 db.prepare(`
   CREATE TABLE IF NOT EXISTS items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
