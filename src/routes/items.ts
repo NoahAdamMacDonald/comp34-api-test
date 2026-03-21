@@ -37,4 +37,19 @@ items.post("/", async (c)=>{
     return c.json({id:result.lastInsertRowid}, 201);
 })
 
+//Delete item by id
+items.delete("/:id", (c)=>{
+    const id = Number(c.req.param("id"));
+
+    const statement = db.prepare("DELETE FROM items WHERE id = ?");
+    const result = statement.run(id);
+
+    if(result.changes === 0) {
+        return c.json({error: "Item not found"}, 404);
+    }
+
+    return c.json({message: "Deleted"})
+})
+
+export default items;
 
