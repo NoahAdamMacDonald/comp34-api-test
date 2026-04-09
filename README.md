@@ -31,7 +31,7 @@ API: [https://comp34-api.fly.dev/](https://comp34-api.fly.dev/)
 
 ## :gear: Project Setup
 
-1. Using WSL Install Bun
+1. Using WSL Install Bun and fly.io CLI
 ```bash
 sudo apt update
 sudo apt install unzip -y
